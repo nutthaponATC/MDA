@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<table>
+		<a href="qq.php"><tr>
+			<td>1</td>
+		</tr></a>
+		<tr>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+		</tr>
+	</table>	
+</body>
+</html>
