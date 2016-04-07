@@ -129,7 +129,7 @@ h1 {
     background-repeat: no-repeat;
 	padding:0px;
 	margin:0px;
-	height:900px;
+	height:1200px;
 	background-size: 100%;
 	background: #862ae3;
 	font-family:TH Sarabun New;
@@ -262,8 +262,8 @@ a:link:hover {
 #sMenu {
     background-color: #293352;
     color: white;
-    padding: 10px;
-    margin-top: -10px;
+    /*padding: 10px;
+    margin-top: -10px;*/
 	font-family:TH Sarabun New;
 	font-size: 28px;
 	color:#ffffff;

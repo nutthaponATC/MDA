@@ -70,7 +70,7 @@ if ($_SESSION['type'] != 3) {
 						<img src="image/book.png" width="40">
 					</div>
 					<div style="width:70%; float:left; padding-top:6%;">
-						<font id="inMenu">จองวัสดุและครุภัณฑ์</font>
+						<font id="inMenu">การอนุมัติ</font>
 					</div>
 				</a>
 			</div>

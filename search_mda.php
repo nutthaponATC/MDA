@@ -17,7 +17,7 @@ if ($_SESSION['type'] != 3) {
 
 	<!-- datatable -->
 	<script src="jquery-1.12.0.min.js"></script>      
-	<script type="text/javascript" src="jquery.dataTables.min.js"></script>  
+	<script type="text/javascript" src="jquery.dataTables.min.js"></script>
 	<link rel="stylesheet" href="jquery.dataTables.min.css" />  
 
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
@@ -39,7 +39,7 @@ if ($_SESSION['type'] != 3) {
 		<div style='width:1000px; heigth:100%; margin:auto; margin-top:17px; padding-top:12px;'>
 			<div style="width:166px; heigth:100%; float:left;">
 				<a href="main_finance.php">
-					<div id="sMenu">หน้าหลัก</div>
+					<div id="sMenu"><img src="image/home.png"></div>
 				</a>
 			</div>
 			<div style="width:166px; heigth:100%; float:left;">
@@ -77,8 +77,11 @@ if ($_SESSION['type'] != 3) {
 		</div>
 	</div>
 
-	<div style='width:100%; height:700px; background:#d8b5fc;'>
-		<div style='width:980px; height:700px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+	<div style='width:100%; height:100px; background:#ffffff;'>
+	</div>
+
+	<div style='width:100%; height:850px; background:#d8b5fc;'>
+		<div style='width:980px; height:850px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
 			<table id="example" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
@@ -101,10 +104,10 @@ if ($_SESSION['type'] != 3) {
 		        		<tr style='cursor: hand;' data-href='show_mda.php?id=".$data['id']."'>
 			                <td>".$data['id_mda']."</td>
 			                <td>".$data['detail']."</td>
-			                <td>".$data['id_type']."</td>
-			                <td>".$data['year']."</td>
-			                <td><a href='edit_mda.php?id=".$data['id']."'><img src='image/edit.png' id='picHover'></a></td>
-			                <td><a href='remove_mda.php?id=".$data['id']."'><img src='image/remove.png' id='picHover'></a></td>
+			                <td><center>".$data['id_type']."</center></td>
+			                <td><center>".$data['year']."</center></td>
+			                <td><center><a href='edit_mda.php?id=".$data['id']."'><img src='image/edit.png' id='picHover'></a></center></td>
+			                <td><center><a href='remove_mda.php?id=".$data['id']."'><img src='image/remove.png' id='picHover'></a><center></td>
 			            </tr>";
 		        	}
 		        	 ?>
@@ -125,6 +128,12 @@ if ($_SESSION['type'] != 3) {
 
 // datatable
 $(document).ready(function() {
+	//Filter Postion
+	$('#example').DataTable( {
+        "sDom": '<"top"f>rt<"bottom"p><"clear">'
+    } );
+
+	//List Filter Year
     var table = $('#example').DataTable();
 
 	table.columns().each( function ( colIdx ) {
@@ -148,6 +157,7 @@ $(document).ready(function() {
 	        } );
 	} );
 
+	//List Filter Year
 	table.columns().each( function ( colIdx ) {
 	    var select = $('<select />')
 	        .appendTo(
@@ -171,6 +181,7 @@ $(document).ready(function() {
 
 } );
 
+//tr link
 jQuery(document).ready(function($) {
     $('#example').on( 'click', 'tbody tr', function () {
         window.document.location = $(this).data("href");
