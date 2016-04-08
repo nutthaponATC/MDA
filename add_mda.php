@@ -1,13 +1,13 @@
 <?php 
 session_start(); 
 include('config.php');
+include('popup.php');
 
 if ($_SESSION['type'] != 3) {
 	echo "<script language='javascript'>";
 	echo "location='index.php';";
 	echo "</script>";
 }
-
 ?>
 <html>
 <head>
@@ -29,38 +29,71 @@ if ($_SESSION['type'] != 3) {
 		</div>
 	</div>
 
-	<div style='width:100%; height:60px;background:#293352;'>
+	<div style='width:100%; height:60px; background:#293352;'>
 		<div style='width:1000px; heigth:100%; margin:auto; margin-top:17px; padding-top:12px;'>
-			<div style="width:166px; heigth:100%; float:left;">
+			<div id="sMenu" style="width:90px; heigth:100%; float:left;">
 				<a href="main_finance.php">
-					<font id="subMenu">หน้าหลัก</font>
+					<div><img src="image/home.png" width="38"></div>
 				</a>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<a href="search_mda.php">
-					<font id="subMenu">ค้นหา</font>
+					<div class="dropbtn">ค้นหา</div>
 				</a>
+				<div class="dropdown-content">
+					<a href="search_mda.php">ครุภัณฑ์</a>
+					<a href="#">ประวัติการยืม</a>
+					<a href="#">ประวัติการคืน</a>
+					<a href="#">การส่งซ้อม</a>
+				</div>
+			</div>			
+			<a href="add_mda.php">
+				<div id="sMenu" style="width:160px; heigth:100%; float:left;">
+					<div>เพิ่มข้อมูล</div>
+				</div>
+			</a>
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<div class="dropbtn">รายงาน</div>
+				<div class="dropdown-content">
+					<a href="#popupReport">รายงานทรัพย์สิน</a>
+					<a href="barcode.php">barcode</a>
+					<a href="#">รายงานการยืม</a>
+					<a href="#">รายงานการคืน</a>
+					<a href="#">รายงานค่าเสื่อมราคา</a>
+					<a href="#">รายงานประวัติทรัพย์สิน</a>
+					<a href="#">ประวัติการส่งซ้อม</a>
+				</div>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href="add_mda.php"><font id="subMenu">เพิ่มข้อมูล</font></a>
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<div class="dropbtn">การยืมคืน</div>
+				<div class="dropdown-content">
+					<a href="">ยืมครุภัณฑ์</a>
+					<a href="">คืนครุภัณฑ์</a>
+				</div>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href=""><font id="subMenu">รายงาน</font></a>
-			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href=""><font id="subMenu">ยืมคืน</font></a>
-			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href=""><font id="subMenu">จัดการข้อมูล</font></a>
-			</div>
+			<a href="">
+				<div id="sMenu" style="width:140px; heigth:100%; float:left;">
+					<div>การอนุมัติ</div>
+				</div>
+			</a>
+			<a href="">
+				<div id="sMenu" style="width:50px; heigth:105%; float:left;">
+					<div><img src="image/pass.png" width="36"></div>
+				</div>
+			</a>
 		</div>
 	</div>
 
-<form name="form1" action="add_mda_process.php" method="POST" enctype="multipart/form-data">
-	<div style='width:100%; height:700px; background:#d8b5fc;'> 
+	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
+		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
+			<h2>เพิ่มข้อมูลวัสดุครุภัณฑ์</h2>
+		</div>
+	</div>
+
+	<form name="form1" action="add_mda_process.php" method="POST" enctype="multipart/form-data">
+	<div style='width:100%; height:750px; background:#d8b5fc;'> 
 		<div style="width:1000px; height:100%; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);">
-			<div id="inAdd" style="padding-top:20px;">
-				<font id="topic">เพิ่มข้อมูลวัสดุครุภัณฑ์</font>
+			<div id="inAdd">
 			</div>
 			<div id="inAdd">
 				เลขทะเบียน 
@@ -189,9 +222,9 @@ if ($_SESSION['type'] != 3) {
 
 		</div>
 	</div>
-	<div style='width:100%; height:30px; background:#d8b5fc; margin-bottom:-20px;'> 	<div style="width:1000px; height:100%; background:#e1c4ff; margin:auto;  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);"></div>
-	</div>
-</form>
+	</form>
+	
+	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
 
 	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px; margin-bottom:0px;">
 		<font color="#ffffff">&copy Copyright By Attawit School Credit By Nutthapon.B</font>

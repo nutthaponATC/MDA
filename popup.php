@@ -4,7 +4,9 @@ include('config.php');
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<link rel="shortcut icon" href="image/icon.ico">
+	<link rel="stylesheet" href="style.css">
+	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
 <body>
 
