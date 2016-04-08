@@ -25,11 +25,9 @@ $pdf->SetFont('thsarabun', '', 14);
 //gen pdf
 $pdf->AddPage('L', 'A4');
 
-// $year = $_POST['year'];
-// $type = $_POST['type'];
-
-$year = 'all';
-$type = 'all';
+$year = $_POST['year'];
+$type = $_POST['type'];
+$record = $_POST['record'];
 
 if ($year == 'all' && $type == 'all') {
 	$sqlGetData = 'SELECT * FROM data_mda';
@@ -80,7 +78,7 @@ while ($fetchArray = mysql_fetch_array($query)) {
 	$note = $fetchArray['note'];
 	$date_in = $fetchArray['date_in'];
 
-	if ($i == 13) {
+	if ($i == $record) {
 		$i = 1;
 		$html .= '</table><br pagebreak="true"/>';
 	}

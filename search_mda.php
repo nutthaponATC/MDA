@@ -37,51 +37,67 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:60px; background:#293352;'>
 		<div style='width:1000px; heigth:100%; margin:auto; margin-top:17px; padding-top:12px;'>
-			<div style="width:166px; heigth:100%; float:left;">
+			<div id="sMenu" style="width:90px; heigth:100%; float:left;">
 				<a href="main_finance.php">
-					<div id="sMenu"><img src="image/home.png"></div>
+					<div><img src="image/home.png" width="38"></div>
 				</a>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<div class="dropdown">
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<a href="search_mda.php">
 					<div class="dropbtn">ค้นหา</div>
-					<div class="dropdown-content">
-						<a href="search_mda.php">ครุภัณฑ์</a>
-						<a href="#">ประวัติการยืม</a>
-						<a href="#">ประวัติการคืน</a>
-					</div>
+				</a>
+				<div class="dropdown-content">
+					<a href="search_mda.php">ครุภัณฑ์</a>
+					<a href="#">ประวัติการยืม</a>
+					<a href="#">ประวัติการคืน</a>
+					<a href="#">การส่งซ้อม</a>
+				</div>
+			</div>			
+			<a href="add_mda.php">
+				<div id="sMenu" style="width:160px; heigth:100%; float:left;">
+					<div>เพิ่มข้อมูล</div>
+				</div>
+			</a>
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<div class="dropbtn">รายงาน</div>
+				<div class="dropdown-content">
+					<a href="#popupReport">รายงานทรัพย์สิน</a>
+					<a href="barcode.php">barcode</a>
+					<a href="#">รายงานการยืม</a>
+					<a href="#">รายงานการคืน</a>
+					<a href="#">รายงานค่าเสื่อมราคา</a>
+					<a href="#">รายงานประวัติทรัพย์สิน</a>
+					<a href="#">ประวัติการส่งซ้อม</a>
 				</div>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href="add_mda.php"><div id="sMenu">เพิ่มข้อมูล</div></a>
-			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<div class="dropdown">
-					<div class="dropbtn">รายงาน</div>
-					<div class="dropdown-content">
-						<a href="#popup1">รายงานทรัพย์สิน</a>
-						<a href="barcode.php">barcode</a>
-						<a href="#">รายงานการยืม</a>
-						<a href="#">รายงานการคืน</a>
-						<a href="#">รายงานค่าเสื่อมราคา</a>
-						<a href="#">รายงานประวัติทรัพย์สิน</a>
-					</div>
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<div class="dropbtn">การยืมคืน</div>
+				<div class="dropdown-content">
+					<a href="">ยืมครุภัณฑ์</a>
+					<a href="">คืนครุภัณฑ์</a>
 				</div>
 			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href=""><div id="sMenu">ยืมคืน</div></a>
-			</div>
-			<div style="width:166px; heigth:100%; float:left;">
-				<a href=""><div id="sMenu">จัดการข้อมูล</div></a>
-			</div>
+			<a href="">
+				<div id="sMenu" style="width:140px; heigth:100%; float:left;">
+					<div>การอนุมัติ</div>
+				</div>
+			</a>
+			<a href="">
+				<div id="sMenu" style="width:50px; heigth:105%; float:left;">
+					<div><img src="image/pass.png" width="36"></div>
+				</div>
+			</a>
 		</div>
 	</div>
 
-	<div style='width:100%; height:100px; background:#ffffff;'>
+	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
+		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
+			<h2>ค้นหาข้อมูลวัสดุ ครุภัณฑ์</h2>
+		</div>
 	</div>
 
-	<div style='width:100%; height:850px; background:#d8b5fc;'>
-		<div style='width:980px; height:850px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+	<div style='width:100%; height:945px; background:#d8b5fc;'>
+		<div style='width:980px; height:925px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
 			<table id="example" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
@@ -118,6 +134,8 @@ if ($_SESSION['type'] != 3) {
 
 	</div>
 
+	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
+
 	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px; margin-bottom:0px;">
 		<font color="#ffffff">&copy Copyright By Attawit School Credit By Nutthapon.B</font>
 	</div>
@@ -137,7 +155,7 @@ $(document).ready(function() {
     var table = $('#example').DataTable();
 
 	table.columns().each( function ( colIdx ) {
-	    var select = $('<select />')
+	    var select = $('<select><option value="">เลือกปี</option></select>')
 	        .appendTo(
 	            table.column([3]).header()
 	        )
@@ -152,14 +170,14 @@ $(document).ready(function() {
 	        .cache( 'search' )
 	        .sort()
 	        .unique()
-	        .each( function ( d ) {
+	        .each( function ( d ) {	       
 	            select.append( $('<option value="'+d+'">'+d+'</option>') );
 	        } );
 	} );
 
-	//List Filter Year
+	//List Filter Type
 	table.columns().each( function ( colIdx ) {
-	    var select = $('<select />')
+	    var select = $('<select><option value="">เลือกหมวด</option></select>')
 	        .appendTo(
 	            table.column([2]).header()
 	        )
