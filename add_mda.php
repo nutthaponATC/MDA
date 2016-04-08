@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
 include('config.php');
-include('popup.php');
+// include('popup.php');
 
 if ($_SESSION['type'] != 3) {
 	echo "<script language='javascript'>";

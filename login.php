@@ -14,10 +14,12 @@ if (isset($user) && $user != "" && isset($pass) && $pass != "") {
 	$fetchData = mysql_fetch_array($query);
 	$type = $fetchData['type'];
 	$user_id = $fetchData['user_id'];
+	$name = $fetchData['name'];
 
 	if ($countCheck == 1) {
 		$_SESSION['type'] = $type;
 		$_SESSION['id'] = $user_id;
+		$_SESSION['name_user'] = $name;
 
 		if ($type == 1) {
 			echo "<script language='javascript'>";

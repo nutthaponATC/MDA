@@ -23,7 +23,7 @@ if ($_SESSION['type'] != 3) {
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
 <body id="barcode">
-<form name="form1" action="report/tcpdf/report/report_barcode.php" method="POST">
+<form name="form1" action="#popupLent" method="POST">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -93,7 +93,7 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>เลือกรายการสำหรับพิมพ์ barcode</h2>
+			<h2>เลือกรายการที่ต้องการยืม</h2>
 		</div>
 	</div>
 
@@ -121,8 +121,7 @@ if ($_SESSION['type'] != 3) {
 		        <tbody>
 		        	<?php 
 
-
-		        	$sql = "SELECT * FROM data_mda";
+		        	$sql = 'SELECT * FROM data_mda WHERE status = 1';
 		        	mysql_query("SET NAMES utf8");
 		        	$query = mysql_query($sql);
 
@@ -131,8 +130,8 @@ if ($_SESSION['type'] != 3) {
 		        		<tr>
 			                <td>".$data['id_mda']."</td>
 			                <td>".$data['detail']."</td>
-			                <td>".$data['id_type']."</td>
-			                <td>".$data['year']."</td>
+			                <td><center>".$data['id_type']."</center></td>
+			                <td><center>".$data['year']."</center></td>
 			                <td><input type='checkbox' name='check[]' value=".$data['id']."></td>
 			            </tr>";
 		        	}
@@ -142,11 +141,8 @@ if ($_SESSION['type'] != 3) {
 		    </table>
 
 			<div style="width:100%; height:50px; margin-right:50px; margin-top:20px; text-align: right;">
-				<!-- <div style="width:500px; float:left;"></div>
-				<div style="float:left;"> -->
-					<input id="bt3" type="submit" name="submit" class="textbox" value="พิมพ์ barcode">
-					<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
-				<!-- </div> -->
+				<input id="bt3" type="submit" name="submit" class="textbox" value="ยืมครุภัณฑ์">
+				<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
 			</div>
 
 		</div>

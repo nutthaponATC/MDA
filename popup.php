@@ -1,4 +1,5 @@
 <?php 
+session_start(); 
 include('config.php');
  ?>
 <html>
@@ -65,6 +66,38 @@ include('config.php');
 					<br>
 					<div style="float:left; margin:auto; margin-top:30px;">
 						<input id="bt3" type="submit" name="submit" class="textbox" value="พิมพ์รายงาน">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id="popupLent" class="overlay">
+		<form name="form2" action="lent_mda_process.php" method="POST">
+			<div class="popup">
+				<div style="font-size:30px;">รายการที่ต้องการยืม</div>
+				<a class="close" href="#">&times;</a>
+				<div class="content">
+					<?php 
+					$arrayId = $_POST['check'];
+					$count = count($arrayId);
+					$i = 0;
+
+					while ($i < $count) {
+						$id = $arrayId[$i];
+						$sql = "SELECT `id_mda`,`detail` FROM data_mda WHERE id = $id";
+						$query = mysql_query($sql);
+						$data = mysql_fetch_array($query);
+						$id_mda = $data['id_mda'];
+						$detail = $data['detail'];
+
+					echo '<input type="text" style="width:50px;" name="id[]" value='.$id.' readonly><input type="text" style="width:150px;" name="id_mda[]" value='.$id_mda.' readonly><input type="text" style="width:200px;" name="detail[]" value='.$detail.' readonly>';
+						$i++;
+					}
+
+					 ?>
+					<div style="float:left; margin:auto; margin-top:30px;">
+						<input id="bt3" type="submit" name="submit" class="textbox" value="ยืนยัน การยืม">
 					</div>
 				</div>
 			</div>
