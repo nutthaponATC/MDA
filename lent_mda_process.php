@@ -3,25 +3,27 @@ session_start();
 echo "<meta charset='utf-8'>";
 include('config.php');
 
-$arrayId = $_POST['id'];
+$arrayId = $_POST['id_data_mda'];
 $arrayId_mda = $_POST['id_mda'];
 $arrayDetail = $_POST['detail'];
 $user_id = $_SESSION['id'];
 $name = $_SESSION['name_user'];
+
 $date = date("Y-m-d");
 
 $count = count($arrayId);
 $i = 0;
 
 while ($i < $count) {
-	$id = $arrayId[$i];
+	$id_data_mda = $arrayId[$i];
 	$id_mda = $arrayId_mda[$i];
 	$detail = $arrayDetail[$i];
-	$sqlInsert = "INSERT INTO lent_return VALUES(null,$id,'$id_mda','$detail',$user_id,'$name','$date','-',0);";
+
+	$sqlInsert = "INSERT INTO lent_return VALUES(null,$id_data_mda,'$id_mda','$detail',$user_id,'$name','$date','-',0);";
 	mysql_query("SET NAMES utf8");
 	$query = mysql_query($sqlInsert);
 
-	$sqlUpdate = "UPDATE data_mda SET status = 0 WHERE id = $id";
+	$sqlUpdate = "UPDATE data_mda SET status = 0 WHERE id = $id_data_mda";
 	$query = mysql_query($sqlUpdate);
 
 	$i++;

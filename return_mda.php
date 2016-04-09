@@ -23,7 +23,7 @@ if ($_SESSION['type'] != 3) {
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
 <body id="barcode">
-<form name="form1" action="report/tcpdf/report/report_barcode.php" method="POST">
+<form name="form1" action="#popupReturn" method="POST">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -93,7 +93,7 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>เลือกรายการสำหรับพิมพ์ barcode</h2>
+			<h2>เลือกรายการที่ต้องการคืน ของคุณ<?php echo $_SESSION['name_user']; ?></h2>
 		</div>
 	</div>
 
@@ -104,8 +104,7 @@ if ($_SESSION['type'] != 3) {
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
-		                <th>หมวด</th>
-		                <th>ปีการศึกษา</th>
+		                <th>วันที่ยืม</th>
 		                <th>เลือก</th>
 		            </tr>
 		        </thead>
@@ -115,14 +114,13 @@ if ($_SESSION['type'] != 3) {
 		                <th></th>
 		                <th></th>
 		                <th></th>
-		                <th></th>
 		            </tr>
 		        </tfoot>
 		        <tbody>
 		        	<?php 
+		        	$user_id = $_SESSION['id'];
 
-
-		        	$sql = "SELECT * FROM data_mda";
+		        	$sql = "SELECT * FROM lent_return WHERE user_id = $user_id AND status != 1";
 		        	mysql_query("SET NAMES utf8");
 		        	$query = mysql_query($sql);
 
@@ -130,10 +128,9 @@ if ($_SESSION['type'] != 3) {
 		        		echo "
 		        		<tr>
 			                <td>".$data['id_mda']."</td>
-			                <td>".$data['detail']."</td>
-			                <td>".$data['id_type']."</td>
-			                <td>".$data['year']."</td>
-			                <td><input type='checkbox' name='check[]' value=".$data['id']."></td>
+			                <td>".$data['name_mda']."</td>
+			                <td><center>".$data['date_lent']."</center></td>
+			                <td><center><input type='checkbox' name='check[]' value=".$data['id']."></center></td>
 			            </tr>";
 		        	}
 		        	 ?>
@@ -142,11 +139,8 @@ if ($_SESSION['type'] != 3) {
 		    </table>
 
 			<div style="width:100%; height:50px; margin-right:50px; margin-top:20px; text-align: right;">
-				<!-- <div style="width:500px; float:left;"></div>
-				<div style="float:left;"> -->
-					<input id="bt3" type="submit" name="submit" class="textbox" value="พิมพ์ barcode">
-					<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
-				<!-- </div> -->
+				<input id="bt3" type="submit" name="submit" class="textbox" value="คืนครุภัณฑ์">
+				<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
 			</div>
 
 		</div>
@@ -169,52 +163,5 @@ $(document).ready(function() {
 	$('#example').DataTable( {
         "sDom": '<"top"f>rt<"bottom"p><"clear">'
     } );
-
-	//List Filter Year
-    var table = $('#example').DataTable();
-
-	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกปี</option></select>')
-	        .appendTo(
-	            table.column([3]).header()
-	        )
-	        .on( 'change', function () {
-	            table
-	                .column([3])
-	                .search( $(this).val() )
-	                .draw();
-	        } );
-	    table
-	        .column([3])
-	        .cache( 'search' )
-	        .sort()
-	        .unique()
-	        .each( function ( d ) {	       
-	            select.append( $('<option value="'+d+'">'+d+'</option>') );
-	        } );
-	} );
-
-	//List Filter Type
-	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกหมวด</option></select>')
-	        .appendTo(
-	            table.column([2]).header()
-	        )
-	        .on( 'change', function () {
-	            table
-	                .column([2])
-	                .search( $(this).val() )
-	                .draw();
-	        } );
-	    table
-	        .column([2])
-	        .cache( 'search' )
-	        .sort()
-	        .unique()
-	        .each( function ( d ) {
-	            select.append( $('<option value="'+d+'">'+d+'</option>') );
-	        } );
-	} );
-
 } );
 </script>

@@ -74,8 +74,8 @@ if ($_SESSION['type'] != 3) {
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">การยืมคืน</div>
 				<div class="dropdown-content">
-					<a href="">ยืมครุภัณฑ์</a>
-					<a href="">คืนครุภัณฑ์</a>
+					<a href="lent_mda.php">ยืมครุภัณฑ์</a>
+					<a href="return_mda.php">คืนครุภัณฑ์</a>
 				</div>
 			</div>
 			<a href="">
