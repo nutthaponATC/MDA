@@ -57,7 +57,7 @@ if ($_SESSION['type'] != 3) {
 				<div class="dropdown-content">
 					<a href="#popupReport">รายงานทรัพย์สิน</a>
 					<a href="barcode.php">barcode</a>
-					<a href="#">รายงานการยืม</a>
+					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
 					<a href="#">รายงานประวัติทรัพย์สิน</a>
@@ -97,17 +97,17 @@ if ($_SESSION['type'] != 3) {
 			</div>
 			<div id="inAdd">
 				เลขทะเบียน 
-				<input id="textbox" style="height:30px; width:60px;" type="text" name="number1">
+				<input id="textbox" style="height:30px; width:60px;" type="text" name="number1" maxlength="3">
 				-
-				<input id="textbox" style="height:30px; width:50px;" type="text" name="number2">
+				<input id="textbox" style="height:30px; width:50px;" type="text" name="number2" maxlength="2">
 				-
-				<input id="textbox" style="height:30px; width:50px;" type="text" name="number3">
+				<input id="textbox" style="height:30px; width:50px;" type="text" name="number3" maxlength="2">
 				-
-				<input id="textbox" style="height:30px; width:60px;" type="text" name="number4">
+				<input id="textbox" style="height:30px; width:60px;" type="text" name="number4" maxlength="3">
 				-
-				<input id="textbox" style="height:30px; width:50px;" type="text" name="number5">
+				<input id="textbox" style="height:30px; width:50px;" type="text" name="number5" maxlength="2">
 				/
-				<input id="textbox" style="height:30px; width:50px; margin-right:20px;" type="text" name="number6">
+				<input id="textbox" style="height:30px; width:50px; margin-right:20px;" type="text" name="number6" maxlength="2">
 				หมวด 
 				<select id="inSearch" style="width:200px; height:30px; margin-right:20px;" name="type">
 					<?php 

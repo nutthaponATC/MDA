@@ -137,6 +137,53 @@ include('config.php');
 		</form>
 	</div>
 
+	<div id="popupReportLent" class="overlay">
+		<form name="formReportLent" action="report/tcpdf/report/report_lent_pdf.php" method="POST">
+			<div class="popup">
+				<div style="font-size:30px;">ออกรายงานการยืม</div>
+				<a class="close" href="#">&times;</a>
+				<div class="content">
+					<div style="float:left; width:100px; font-size:20px;">เดือน</div>
+					<div style="float:left;">
+						<select id="inSearch" style="width:200px; height:30px; margin-right:20px; margin-top:2px;" name="month">
+							<option value="all">ทุกเดือน</option>
+							<option value="01">มกราคม</option>
+							<option value="02">กุมภาพันธ์</option>
+							<option value="03">มีนาคม</option>
+							<option value="04">เมษายน</option>
+							<option value="05">พฤษภาคม</option>
+							<option value="06">มิถุนายน</option>
+							<option value="07">กรกฎาคม</option>
+							<option value="08">สิงหาคม</option>
+							<option value="09">กันยายน</option>
+							<option value="10">ตุลาคม</option>
+							<option value="11">พฤศจิกายน</option>
+							<option value="12">ธันวาคม</option>
+						</select>
+					</div>
+					<br>
+					<div style="float:left; width:100px;font-size:20px ;">ปี</div>
+					<div style="float:left;">
+						<select id="inSearch" style="width:200px; height:30px; margin-right:20px; margin-top:2px;" name="year">
+							<option value="all">ทุกปีการศึกษา</option>
+							<?php 
+								$sql = "SELECT * FROM year";
+								mysql_query("SET NAMES utf8");
+								$query = mysql_query($sql);
+								while ($data = mysql_fetch_array($query)) {
+									echo '<option value='.$data['year'].'>'.$data['year'].'</option>';
+								}
+							 ?>
+						</select>
+					</div>
+					
+					<div style="float:left; margin:auto; margin-top:30px;">
+						<input id="bt3" type="submit" name="submit" class="textbox" value="พิมพ์รายงาน">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
 </body>
 </html>
