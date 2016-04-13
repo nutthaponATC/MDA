@@ -11,6 +11,8 @@ $name = $_SESSION['name_user'];
 
 $date = date("Y-m-d");
 
+$year = date("d");
+
 $count = count($arrayId);
 $i = 0;
 
@@ -19,7 +21,7 @@ while ($i < $count) {
 	$id_mda = $arrayId_mda[$i];
 	$detail = $arrayDetail[$i];
 
-	$sqlInsert = "INSERT INTO lent_return VALUES(null,$id_data_mda,'$id_mda','$detail',$user_id,'$name','$date','-',0);";
+	$sqlInsert = "INSERT INTO lent_return VALUES(null,$id_data_mda,'$id_mda','$detail',$user_id,'$name','$date','-','$year',0);";
 	mysql_query("SET NAMES utf8");
 	$query = mysql_query($sqlInsert);
 

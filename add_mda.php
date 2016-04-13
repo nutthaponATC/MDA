@@ -42,8 +42,8 @@ if ($_SESSION['type'] != 3) {
 				</a>
 				<div class="dropdown-content">
 					<a href="search_mda.php">ครุภัณฑ์</a>
-					<a href="#">ประวัติการยืม</a>
-					<a href="#">ประวัติการคืน</a>
+					<a href="show_lent.php">ประวัติการยืม</a>
+					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="#">การส่งซ้อม</a>
 				</div>
 			</div>			
