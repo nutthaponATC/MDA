@@ -12,7 +12,7 @@ include('config.php');
 <body>
 
 	<div id="popupReport" class="overlay">
-		<form name="form1" action="report/tcpdf/report/report_mda_pdf.php" method="POST">
+		<form name="formReport" action="report/tcpdf/report/report_mda_pdf.php" method="POST">
 			<div class="popup">
 				<div style="font-size:30px;">ออกรายงานทรัพย์สิน</div>
 				<a class="close" href="#">&times;</a>
@@ -73,7 +73,7 @@ include('config.php');
 	</div>
 
 	<div id="popupLent" class="overlay">
-		<form name="form2" action="lent_mda_process.php" method="POST">
+		<form name="formLent" action="lent_mda_process.php" method="POST">
 			<div class="popup">
 				<div style="font-size:30px;">รายการที่ต้องการยืม</div>
 				<a class="close" href="#">&times;</a>
