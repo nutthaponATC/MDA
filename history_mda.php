@@ -17,13 +17,13 @@ if ($_SESSION['type'] != 3) {
 
 	<!-- datatable -->
 	<script src="jquery-1.12.0.min.js"></script>      
-	<script type="text/javascript" src="jquery.dataTables.min.js"></script>  
+	<script type="text/javascript" src="jquery.dataTables.min.js"></script>
 	<link rel="stylesheet" href="jquery.dataTables.min.css" />  
 
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
-<body id="barcode">
-<form name="form1" action="report/tcpdf/report/report_barcode.php" method="POST">
+<body id="search">
+<form name="form1">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -93,75 +93,108 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>เลือกรายการสำหรับพิมพ์ barcode</h2>
+			<h2>รายงานประวัติทรัพย์สิน</h2>
 		</div>
 	</div>
 
-	<div style='width:100%; height:1000px; background:#d8b5fc;'>
-		<div style='width:980px; height:980px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+	<div style='width:100%; height:945px; background:#d8b5fc;'>
+		<div style='width:980px; height:925px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
 			<table id="example" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
-		                <th>หมวด</th>
-		                <th>ปีการศึกษา</th>
-		                <th>เลือก</th>
+		                <th>ผู้ยืม</th>
+		                <th>วันที่ยืม</th>
+		                <th>วันที่คืน</th>
+		                <th>สถานะ</th>
 		            </tr>
 		        </thead>
-		        <tfoot>
-		            <tr>
-		                <th></th>
-		                <th></th>
-		                <th></th>
-		                <th></th>
-		                <th></th>
-		            </tr>
-		        </tfoot>
 		        <tbody>
 		        	<?php 
-
-
-		        	$sql = "SELECT * FROM data_mda";
+		        	$sql = "SELECT * FROM lent_return";
 		        	mysql_query("SET NAMES utf8");
 		        	$query = mysql_query($sql);
 
 		        	while ($data = mysql_fetch_array($query)) {
+
+		        		if ($data['status'] == 0) {
+		        			$statusLent = 'รอการอนุมัติ';
+		        		} elseif ($data['status'] == 1) {
+		        			$statusLent = 'คืนแล้ว';
+		        		} else {
+		        			$statusLent = 'ยังไม่ได้คืน';
+		        		}
+
+		        		$dateInput = date('j F Y', strtotime($data['date_lent']));
+						$explodeDate = explode(" ", $dateInput);
+
+						switch($explodeDate[1]) {
+						    case "January": $month = "มกราคม"; break;
+						    case "February": $month = "กุมภาพันธ์"; break;
+						    case "March": $month = "มีนาคม"; break;
+						    case "April": $month = "เมษายน"; break;
+						    case "May": $month = "พฤษภาคม"; break;
+						    case "June": $month = "มิถุนายน"; break;
+						    case "July": $month = "กรกฎาคม"; break;
+						    case "August": $month = "สิงหาคม"; break;
+						    case "September": $month = "กันยายน"; break;
+						    case "October": $month = "ตุลาคม"; break;
+						    case "November": $month = "พฤศจิกายน"; break;
+						    case "December": $month = "ธันวาคม"; break;
+						}
+
+						$date = $explodeDate[0].' '.$month.' '.$explodeDate[2];
+
+						$dateInputReturn = date('j F Y', strtotime($data['date_lent']));
+						$explodeDateReturn = explode(" ", $dateInputReturn);
+
+						switch($explodeDateReturn[1]) {
+						    case "January": $month = "มกราคม"; break;
+						    case "February": $month = "กุมภาพันธ์"; break;
+						    case "March": $month = "มีนาคม"; break;
+						    case "April": $month = "เมษายน"; break;
+						    case "May": $month = "พฤษภาคม"; break;
+						    case "June": $month = "มิถุนายน"; break;
+						    case "July": $month = "กรกฎาคม"; break;
+						    case "August": $month = "สิงหาคม"; break;
+						    case "September": $month = "กันยายน"; break;
+						    case "October": $month = "ตุลาคม"; break;
+						    case "November": $month = "พฤศจิกายน"; break;
+						    case "December": $month = "ธันวาคม"; break;
+						}
+
+						$dateReturn = $explodeDateReturn[0].' '.$month.' '.$explodeDateReturn[2];
+
 		        		echo "
-		        		<tr>
+		        		<tr style='cursor: hand;' data-href='show_mda.php?id=".$data['id_data_mda']."'>
 			                <td>".$data['id_mda']."</td>
-			                <td>".$data['detail']."</td>
-			                <td><center>".$data['id_type']."</center></td>
-			                <td><center>".$data['year']."</center></td>
-			                <td><input type='checkbox' name='check[]' value=".$data['id']."></td>
+			                <td>".$data['name_mda']."</td>
+			                <td>".$data['name_user']."</td>
+			                <td><center>".$date."</center></td>
+			                <td><center>".$dateReturn."</center></td>
+			                <td><center>".$statusLent."</center></td>
 			            </tr>";
 		        	}
 		        	 ?>
 		            
 		        </tbody>
 		    </table>
-
-			<div style="width:100%; height:50px; margin-right:50px; margin-top:20px; text-align: right;">
-				<!-- <div style="width:500px; float:left;"></div>
-				<div style="float:left;"> -->
-					<input id="bt3" type="submit" name="submit" class="textbox" value="พิมพ์ barcode">
-					<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
-				<!-- </div> -->
-			</div>
-
 		</div>
+
 	</div>
 	</form>
 
-	<div style="background: #862ae3; margin-top:-5px; width:100%;"></div>
+	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
 
-	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px;">
+	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px; margin-bottom:0px;">
 		<font color="#ffffff">&copy Copyright By Attawit School Credit By Nutthapon.B</font>
 	</div>
 </body>
 </html>
 
 <script language='javascript'>
+
 
 // datatable
 $(document).ready(function() {
@@ -170,22 +203,22 @@ $(document).ready(function() {
         "sDom": '<"top"f>rt<"bottom"p><"clear">'
     } );
 
-	//List Filter Year
+    //List Filter Year
     var table = $('#example').DataTable();
 
 	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกปี</option></select>')
+	    var select = $('<select><option value="">เลือกเลขทะเบียน</option></select>')
 	        .appendTo(
-	            table.column([3]).header()
+	            table.column([0]).header()
 	        )
 	        .on( 'change', function () {
 	            table
-	                .column([3])
+	                .column([0])
 	                .search( $(this).val() )
 	                .draw();
 	        } );
 	    table
-	        .column([3])
+	        .column([0])
 	        .cache( 'search' )
 	        .sort()
 	        .unique()
@@ -194,9 +227,29 @@ $(document).ready(function() {
 	        } );
 	} );
 
-	//List Filter Type
 	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกหมวด</option></select>')
+	    var select = $('<select><option value="">เลือกรายละเอียด</option></select>')
+	        .appendTo(
+	            table.column([1]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([1])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([1])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
+
+	table.columns().each( function ( colIdx ) {
+	    var select = $('<select><option value="">เลือกผู้ยืม</option></select>')
 	        .appendTo(
 	            table.column([2]).header()
 	        )
@@ -211,10 +264,38 @@ $(document).ready(function() {
 	        .cache( 'search' )
 	        .sort()
 	        .unique()
-	        .each( function ( d ) {
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
+
+	table.columns().each( function ( colIdx ) {
+	    var select = $('<select><option value="">เลือกสถานะ</option></select>')
+	        .appendTo(
+	            table.column([5]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([5])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([5])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
 	            select.append( $('<option value="'+d+'">'+d+'</option>') );
 	        } );
 	} );
 
 } );
+
+//tr link
+jQuery(document).ready(function($) {
+    $('#example').on( 'click', 'tbody tr', function () {
+        window.document.location = $(this).data("href");
+    });
+});
 </script>

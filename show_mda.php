@@ -41,6 +41,11 @@ $picture = $data['picture'];
 	<link rel="shortcut icon" href="image/icon.ico">
 	<link rel="stylesheet" href="style.css">
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
+
+	<!-- datatable -->
+	<script src="jquery-1.12.0.min.js"></script>      
+	<script type="text/javascript" src="jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="jquery.dataTables.min.css" />  
 </head>
 <body id="add">
 	<div style='width:100%; height:180px;'>
@@ -86,7 +91,7 @@ $picture = $data['picture'];
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
-					<a href="#">รายงานประวัติทรัพย์สิน</a>
+					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
 					<a href="#">ประวัติการส่งซ้อม</a>
 				</div>
 			</div>
@@ -128,7 +133,7 @@ $picture = $data['picture'];
 		</div>
 	</div>
 
-	<div style='width:100%; height:780px; background:#d8b5fc;'> 
+	<div style='width:100%; height:1600px; background:#d8b5fc;'> 
 		<div style="width:1000px; height:100%; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);">
 			<div id="inAdd"></div>
 			<div style="width:380px; float:left; padding-left: 10px; font-family:TH Sarabun New; font-size: 25px; color:#565656; height:150px; float:left;">
@@ -223,7 +228,114 @@ $picture = $data['picture'];
 					<textarea class="textbox" name="address" style="width:300px; height:150px;" rows="3" cols="60" readonly><?php echo $address; ?></textarea>	
 				</div>
 			</div>
+
+			<div style='margin-top:230px;'></div>
+
+			<div style='width:1000px; height:50px; margin:auto; background: #862ae3; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+				<div style="width:60%; height:100%; float:left;">
+					<h2 style="margin-top:-15px; padding-left:10px; color:#ffffff;">ประวัติทรัพย์สิน</h2>
+				</div>
+				<div style="width:30%; height:100%; margin-left:50px; float:left;">
+				</div>
+			</div>
+
+			<div style='width:980px; height:780px; padding-top:20px;'>
+				<table id="example" class="display" style="font-size: 20px; margin-left:10px; margin-right:10px; " cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>เลขทะเบียน</th>
+			                <th>รายละเอียด</th>
+			                <th>ผู้ยืม</th>
+			                <th>วันที่ยืม</th>
+			                <th>วันที่คืน</th>
+			                <th>สถานะ</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<?php 
+			        	$sql = "SELECT * FROM lent_return WHERE id_data_mda = '$id'";
+			        	mysql_query("SET NAMES utf8");
+			        	$query = mysql_query($sql);
+
+			        	while ($data = mysql_fetch_array($query)) {
+
+			        		if ($data['status'] == 0) {
+			        			$statusLent = 'รอการอนุมัติ';
+			        		} elseif ($data['status'] == 1) {
+			        			$statusLent = 'คืนแล้ว';
+			        		} else {
+			        			$statusLent = 'ยังไม่ได้คืน';
+			        		}
+
+			        		$dateInput = date('j F Y', strtotime($data['date_lent']));
+							$explodeDate = explode(" ", $dateInput);
+
+							switch($explodeDate[1]) {
+							    case "January": $month = "มกราคม"; break;
+							    case "February": $month = "กุมภาพันธ์"; break;
+							    case "March": $month = "มีนาคม"; break;
+							    case "April": $month = "เมษายน"; break;
+							    case "May": $month = "พฤษภาคม"; break;
+							    case "June": $month = "มิถุนายน"; break;
+							    case "July": $month = "กรกฎาคม"; break;
+							    case "August": $month = "สิงหาคม"; break;
+							    case "September": $month = "กันยายน"; break;
+							    case "October": $month = "ตุลาคม"; break;
+							    case "November": $month = "พฤศจิกายน"; break;
+							    case "December": $month = "ธันวาคม"; break;
+							}
+
+							$date = $explodeDate[0].' '.$month.' '.$explodeDate[2];
+
+							$dateInputReturn = date('j F Y', strtotime($data['date_lent']));
+							$explodeDateReturn = explode(" ", $dateInputReturn);
+
+							switch($explodeDateReturn[1]) {
+							    case "January": $month = "มกราคม"; break;
+							    case "February": $month = "กุมภาพันธ์"; break;
+							    case "March": $month = "มีนาคม"; break;
+							    case "April": $month = "เมษายน"; break;
+							    case "May": $month = "พฤษภาคม"; break;
+							    case "June": $month = "มิถุนายน"; break;
+							    case "July": $month = "กรกฎาคม"; break;
+							    case "August": $month = "สิงหาคม"; break;
+							    case "September": $month = "กันยายน"; break;
+							    case "October": $month = "ตุลาคม"; break;
+							    case "November": $month = "พฤศจิกายน"; break;
+							    case "December": $month = "ธันวาคม"; break;
+							}
+
+							$dateReturn = $explodeDateReturn[0].' '.$month.' '.$explodeDateReturn[2];
+
+			        		echo "
+			        		<tr>
+				                <td>".$data['id_mda']."</td>
+				                <td>".$data['name_mda']."</td>
+				                <td>".$data['name_user']."</td>
+				                <td><center>".$date."</center></td>
+				                <td><center>".$dateReturn."</center></td>
+				                <td><center>".$statusLent."</center></td>
+				            </tr>";
+			        	}
+			        	 ?>
+			            
+			        </tbody>
+			    </table>
+
+			    <div style='margin-top:80px;'></div>
+
+			    <div style='width:1000px; height:50px; margin-right:0px; margin:auto; background: #862ae3; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+					<div style="width:60%; height:100%; float:left;">
+						<h2 style="margin-top:-15px; padding-left:10px; color:#ffffff;">ประวัติการซ้อม</h2>
+					</div>
+					<div style="width:30%; height:100%; margin-left:50px; float:left;">
+					</div>
+				</div>
+			</div>
+
+			
 		</div>
+
 	</div>
 
 	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
@@ -235,6 +347,16 @@ $picture = $data['picture'];
 </html>
 
 <script language='javascript'>
+	$(document).ready(function() {
+		//Filter Postion
+		$('#example').DataTable( {
+	        "sDom": '<"top">rt<"bottom"><"clear">'
+	    } );
+
+		//List Filter Year
+	    var table = $('#example').DataTable();
+    } );
+
 	document.getElementById("files").onchange = function () {
 	    var reader = new FileReader();
 	    reader.onload = function (e) {

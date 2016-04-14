@@ -86,7 +86,7 @@ $picture = $data['picture'];
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
-					<a href="#">รายงานประวัติทรัพย์สิน</a>
+					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
 					<a href="#">ประวัติการส่งซ้อม</a>
 				</div>
 			</div>
