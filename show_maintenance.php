@@ -23,6 +23,7 @@ if ($_SESSION['type'] != 3) {
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
 <body id="search">
+<form name="form1">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -93,7 +94,7 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>ค้นหาข้อมูลวัสดุ ครุภัณฑ์</h2>
+			<h2>ประวัติการส่งซ้อม</h2>
 		</div>
 	</div>
 
@@ -104,27 +105,58 @@ if ($_SESSION['type'] != 3) {
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
-		                <th>หมวด</th>
+		                <th>รายละเอียดการซ้อม</th>
 		                <th>ปีการศึกษา</th>
-		                <th>แก้ไข</th>
-		                <th>ลบ</th>
+		                <th>สถานะ</th>
 		            </tr>
 		        </thead>
 		        <tbody>
 		        	<?php 
-		        	$sql = "SELECT * FROM data_mda";
+		        	$sql = "SELECT * FROM maintenance";
 		        	mysql_query("SET NAMES utf8");
 		        	$query = mysql_query($sql);
 
 		        	while ($data = mysql_fetch_array($query)) {
+		        		$id_data_mda = $data['id_data_mda'];
+		        		$sqlDataMda = "SELECT * FROM data_mda WHERE id = $id_data_mda";
+		        		$queryDataMda = mysql_query($sqlDataMda);
+		        		$dataMda = mysql_fetch_array($queryDataMda);
+
+		        		if ($data['status'] == 0) {
+		        			$statusMaintenance = 'ส่งซ้อม';
+		        		} else {
+		        			$statusMaintenance = 'ซ้อมเรียบร้อย';
+		        		}
+
+		        		$dateInput = date('j F Y', strtotime($data['date_send']));
+						$explodeDate = explode(" ", $dateInput);
+
+						switch($explodeDate[1]) {
+						    case "January": $month = "มกราคม"; break;
+						    case "February": $month = "กุมภาพันธ์"; break;
+						    case "March": $month = "มีนาคม"; break;
+						    case "April": $month = "เมษายน"; break;
+						    case "May": $month = "พฤษภาคม"; break;
+						    case "June": $month = "มิถุนายน"; break;
+						    case "July": $month = "กรกฎาคม"; break;
+						    case "August": $month = "สิงหาคม"; break;
+						    case "September": $month = "กันยายน"; break;
+						    case "October": $month = "ตุลาคม"; break;
+						    case "November": $month = "พฤศจิกายน"; break;
+						    case "December": $month = "ธันวาคม"; break;
+						}
+
+						$year = $explodeDate[2]+543;
+
+						$date = $explodeDate[0].' '.$month.' '.$year;
+
 		        		echo "
-		        		<tr style='cursor: hand;' data-href='show_mda.php?id=".$data['id']."'>
+		        		<tr style='cursor: hand;' data-href='show_maintenance_detail.php?id=".$data['id']."'>
 			                <td>".$data['id_mda']."</td>
+			                <td>".$dataMda['detail']."</td>
 			                <td>".$data['detail']."</td>
-			                <td><center>".$data['id_type']."</center></td>
 			                <td><center>".$data['year']."</center></td>
-			                <td><center><a href='edit_mda.php?id=".$data['id']."'><img src='image/edit.png' id='picHover'></a></center></td>
-			                <td><center><a href='remove_mda.php?id=".$data['id']."'><img src='image/remove.png' id='picHover'></a><center></td>
+			                <td><center>".$statusMaintenance."</center></td>
 			            </tr>";
 		        	}
 		        	 ?>
@@ -134,6 +166,7 @@ if ($_SESSION['type'] != 3) {
 		</div>
 
 	</div>
+	</form>
 
 	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
 
@@ -145,6 +178,7 @@ if ($_SESSION['type'] != 3) {
 
 <script language='javascript'>
 
+
 // datatable
 $(document).ready(function() {
 	//Filter Postion
@@ -152,8 +186,50 @@ $(document).ready(function() {
         "sDom": '<"top"f>rt<"bottom"p><"clear">'
     } );
 
-	//List Filter Year
+    //List Filter Year
     var table = $('#example').DataTable();
+
+	table.columns().each( function ( colIdx ) {
+	    var select = $('<select><option value="">เลือกเลขทะเบียน</option></select>')
+	        .appendTo(
+	            table.column([0]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([0])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([0])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
+
+	table.columns().each( function ( colIdx ) {
+	    var select = $('<select><option value="">เลือกรายละเอียด</option></select>')
+	        .appendTo(
+	            table.column([1]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([1])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([1])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
 
 	table.columns().each( function ( colIdx ) {
 	    var select = $('<select><option value="">เลือกปี</option></select>')
@@ -176,24 +252,23 @@ $(document).ready(function() {
 	        } );
 	} );
 
-	//List Filter Type
 	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกหมวด</option></select>')
+	    var select = $('<select><option value="">เลือกสถานะ</option></select>')
 	        .appendTo(
-	            table.column([2]).header()
+	            table.column([4]).header()
 	        )
 	        .on( 'change', function () {
 	            table
-	                .column([2])
+	                .column([4])
 	                .search( $(this).val() )
 	                .draw();
 	        } );
 	    table
-	        .column([2])
+	        .column([4])
 	        .cache( 'search' )
 	        .sort()
 	        .unique()
-	        .each( function ( d ) {
+	        .each( function ( d ) {	       
 	            select.append( $('<option value="'+d+'">'+d+'</option>') );
 	        } );
 	} );

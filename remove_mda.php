@@ -88,7 +88,7 @@ $picture = $data['picture'];
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
 					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
-					<a href="#">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">

@@ -109,19 +109,9 @@ $status = $data['status'];
 
 	<div style="width:100%; height:5px; background:#ffffff;"></div>
 
-	<div style='width:100%; height:80px; background:#ffffff;'>
+	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<div style="width:60%; height:100%; float:left;">
-				<h2 style="margin-top:-5px;">ข้อมูลการส่งซ้อม</h2>
-			</div>
-			<div style="width:30%; height:100%; margin-left:50px; float:left;">
-				<div style="width:150px; float:left; margin-top:20px;">
-					<input id="bt3" type="submit" name="submit" class="textbox" value="บันทึกการส่งซ้อม">
-				</div>
-				<div style="width:10%; float:left; margin-top:20px;">
-					<a href="select_maintenance.php"><input id="bt3" type="button" name="back" class="textbox" value="ย้อนกลับ"></a>
-				</div>				
-			</div>
+			<h2>รายละเอียดการส่งซ้อม</h2>
 		</div>
 	</div>
 
@@ -148,106 +138,57 @@ $status = $data['status'];
 			</div>
 
 			<?php 
-				if ($status == 2) {
-					$sqlMaintenance = "SELECT * FROM maintenance WHERE id_data_mda = $id AND status = 0";
-					$query = mysql_query($sqlMaintenance);
-					$dataMaintenance = mysql_fetch_array($query);
+				$sqlMaintenance = "SELECT * FROM maintenance WHERE id = $id";
+				$query = mysql_query($sqlMaintenance);
+				$dataMaintenance = mysql_fetch_array($query);
 
-					echo "<div id='inAdd'>
-						ผู้ดูแล
-						<input id='textbox' style='height:30px; width:300px; margin-right:20px;' type='text' name='supervisor' value=".$dataMaintenance['supervisor'].">
-						วันที่ส่งซ้อม
-						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_send'  value=".$dataMaintenance['date_send'].">
-						วันที่ซ้อมเสร็จ
-						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_return'>
+				echo "<div id='inAdd'>
+					ผู้ดูแล
+					<input id='textbox' style='height:30px; width:300px; margin-right:20px;' type='text' name='supervisor' value=".$dataMaintenance['supervisor']." readonly>
+					วันที่ส่งซ้อม
+					<input id='textbox' style='height:30px; width:200px;' type='date' name='date_send'  value=".$dataMaintenance['date_send']." readonly>
+					วันที่ซ้อมเสร็จ
+					<input id='textbox' style='height:30px; width:200px;' type='date' name='date_return' readonly>
+				</div>
+
+				<div style='width:100%; height:200px; margin-top:20px;'>
+					<div style='width:45%; height:100%; float:left;'>
+						<div style='width:150px; height:100%; float:left;'>
+							<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
+								รายละเอียดการซ้อม
+							</font>
+						</div>
+						<div style='width:270px; height:100%; float:left;'>
+							<textarea class='textbox' name='detail' style='width:300px; height:100%;' rows='4' cols='50'>".$dataMaintenance['detail']."</textarea readonly>	
+						</div>
 					</div>
 
-					<div style='width:100%; height:200px; margin-top:20px;'>
-						<div style='width:45%; height:100%; float:left;'>
-							<div style='width:150px; height:100%; float:left;'>
+					<div style='width:53%; height:100%; float:left; padding-left:20px;'>
+						<div style='width:100%; height:30%;'>
+							<div style='width:100px; height:100%; float:left;'>
 								<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-									รายละเอียดการซ้อม
+									ชื่อบริษัท
 								</font>
 							</div>
-							<div style='width:270px; height:100%; float:left;'>
-								<textarea class='textbox' name='detail' style='width:300px; height:100%;' rows='4' cols='50'>".$dataMaintenance['detail']."</textarea>	
+							<div style='width:100%-100px; height:100%; float:left;'>
+								<input id='textbox' style='height:30px; width:370px;' type='text' name='company' value=".$dataMaintenance['company']." readonly>
 							</div>
-						</div>
-
-						<div style='width:53%; height:100%; float:left; padding-left:20px;'>
-							<div style='width:100%; height:30%;'>
-								<div style='width:100px; height:100%; float:left;'>
-									<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-										ชื่อบริษัท
-									</font>
-								</div>
-								<div style='width:100%-100px; height:100%; float:left;'>
-									<input id='textbox' style='height:30px; width:370px;' type='text' name='company' value=".$dataMaintenance['company'].">
-								</div>
-							</div>	
-							<div style='width:100%; height:50%;'>
-								<div style='width:100px; height:100%; float:left;'>
-									<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-										ค่าใช้จ่าย
-									</font>
-								</div>
-								<div style='width:100%-100px; height:100%; float:left;'>
-									<input id='textbox' style='height:30px; width:370px;' type='text' name='outgoings' value=".$dataMaintenance['outgoings'].">
-									<input type='hidden' name='id_data_mda' value=".$id.">
-									<input type='hidden' name='status' value=".$status.">
-									<input type='hidden' name='id_maintenance' value=".$dataMaintenance['id'].">
-								</div>
-							</div>	
-						</div>					
-					</div>";
-				} else {
-					echo "<div id='inAdd'>
-						ผู้ดูแล
-						<input id='textbox' style='height:30px; width:300px; margin-right:20px;' type='text' name='supervisor'>
-						วันที่ส่งซ้อม
-						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_send'>
-						วันที่ซ้อมเสร็จ
-						<input id='textbox' style='height:30px; width:200px;' type='text' name='date_return' value='-' readonly>
-					</div>
-
-					<div style='width:100%; height:200px; margin-top:20px;'>
-						<div style='width:45%; height:100%; float:left;'>
-							<div style='width:150px; height:100%; float:left;'>
-								<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-									รายละเอียดการซ้อม
+						</div>	
+						<div style='width:100%; height:50%;'>
+							<div style='width:100px; height:100%; float:left;'>
+								<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;' readonly>
+									ค่าใช้จ่าย
 								</font>
 							</div>
-							<div style='width:270px; height:100%; float:left;'>
-								<textarea class='textbox' name='detail' style='width:300px; height:100%;' rows='4' cols='50'></textarea>	
+							<div style='width:100%-100px; height:100%; float:left;'>
+								<input id='textbox' style='height:30px; width:370px;' type='text' name='outgoings' value=".$dataMaintenance['outgoings']." readonly>
+								<input type='hidden' name='id_data_mda' value=".$id.">
+								<input type='hidden' name='status' value=".$status.">
+								<input type='hidden' name='id_maintenance' value=".$dataMaintenance['id'].">
 							</div>
-						</div>
-
-						<div style='width:53%; height:100%; float:left; padding-left:20px;'>
-							<div style='width:100%; height:30%;'>
-								<div style='width:100px; height:100%; float:left;'>
-									<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-										ชื่อบริษัท
-									</font>
-								</div>
-								<div style='width:100%-100px; height:100%; float:left;'>
-									<input id='textbox' style='height:30px; width:370px;' type='text' name='company'>
-								</div>
-							</div>	
-							<div style='width:100%; height:50%;'>
-								<div style='width:100px; height:100%; float:left;'>
-									<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-										ค่าใช้จ่าย
-									</font>
-								</div>
-								<div style='width:100%-100px; height:100%; float:left;'>
-									<input id='textbox' style='height:30px; width:370px;' type='text' name='outgoings'>
-									<input type='hidden' name='id_data_mda' value=".$id.">
-									<input type='hidden' name='status' value=".$status.">
-								</div>
-							</div>	
-						</div>					
-					</div>";
-				}
+						</div>	
+					</div>					
+				</div>";
 			 ?>
 
 		</div>
