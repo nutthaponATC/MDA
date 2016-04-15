@@ -66,6 +66,8 @@ $status = $data['status'];
 					<a href="search_mda.php">ครุภัณฑ์</a>
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
+					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -83,8 +85,7 @@ $status = $data['status'];
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
-					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">

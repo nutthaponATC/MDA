@@ -44,6 +44,8 @@ if ($_SESSION['type'] != 3) {
 					<a href="search_mda.php">ครุภัณฑ์</a>
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
+					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -61,8 +63,7 @@ if ($_SESSION['type'] != 3) {
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
-					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -108,9 +109,9 @@ if ($_SESSION['type'] != 3) {
 				-
 				<input id="textbox" style="height:30px; width:50px;" type="text" name="number5" maxlength="2">
 				/
-				<input id="textbox" style="height:30px; width:50px; margin-right:20px;" type="text" name="number6" maxlength="2">
+				<input id="textbox" style="height:30px; width:50px; margin-right:10px;" type="text" name="number6" maxlength="2">
 				หมวด 
-				<select id="inSearch" style="width:200px; height:30px; margin-right:20px;" name="type">
+				<select id="inSearch" style="width:200px; height:30px; margin-right:5px;" name="type">
 					<?php 
 						$sql = "SELECT * FROM type";
 						mysql_query("SET NAMES utf8");
@@ -122,7 +123,17 @@ if ($_SESSION['type'] != 3) {
 					
 				</select>
 				ปีการศึกษา
-				<input id="textbox" style="height:30px; width:100px;" type="text" name="year">
+				<select id="inSearch" style="width:100px; height:30px; margin-right:20px;" name="year">
+					<?php 
+						$sql = "SELECT * FROM year";
+						mysql_query("SET NAMES utf8");
+						$query = mysql_query($sql);
+						while ($data = mysql_fetch_array($query)) {
+							echo '<option value='.$data['year'].'>'.$data['year'].'</option>';
+						}
+					 ?>
+					
+				</select>
 			</div>
 
 			<div id="inAdd">

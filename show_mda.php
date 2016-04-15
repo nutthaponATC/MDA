@@ -75,6 +75,8 @@ $picture = $data['picture'];
 					<a href="search_mda.php">ครุภัณฑ์</a>
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
+					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -92,8 +94,7 @@ $picture = $data['picture'];
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
 					<a href="#">รายงานค่าเสื่อมราคา</a>
-					<a href="history_mda.php">รายงานประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -240,7 +241,7 @@ $picture = $data['picture'];
 				</div>
 			</div>
 
-			<div style='width:980px; height:780px; padding-top:20px;'>
+			<div style='width:980px; height:350px; padding-top:20px;'>
 				<table id="example" class="display" style="font-size: 20px; margin-left:10px; margin-right:10px; " cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
@@ -333,6 +334,72 @@ $picture = $data['picture'];
 					</div>
 				</div>
 			</div>
+		
+			<div style='width:980px; height:300px; padding-top:20px;'>
+				<table id="example2" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>เลขทะเบียน</th>
+			                <th>รายละเอียด</th>
+			                <th>รายละเอียดการซ้อม</th>
+			                <th>ปีการศึกษา</th>
+			                <th>สถานะ</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<?php 
+			        	$sql = "SELECT * FROM maintenance WHERE id_data_mda = $id";
+			        	mysql_query("SET NAMES utf8");
+			        	$query = mysql_query($sql);
+
+			        	while ($data = mysql_fetch_array($query)) {
+			        		$id_data_mda = $data['id_data_mda'];
+			        		$sqlDataMda = "SELECT * FROM data_mda WHERE id = $id_data_mda";
+			        		$queryDataMda = mysql_query($sqlDataMda);
+			        		$dataMda = mysql_fetch_array($queryDataMda);
+
+			        		if ($data['status'] == 0) {
+			        			$statusMaintenance = 'ส่งซ้อม';
+			        		} else {
+			        			$statusMaintenance = 'ซ้อมเรียบร้อย';
+			        		}
+
+			        		$dateInput = date('j F Y', strtotime($data['date_send']));
+							$explodeDate = explode(" ", $dateInput);
+
+							switch($explodeDate[1]) {
+							    case "January": $month = "มกราคม"; break;
+							    case "February": $month = "กุมภาพันธ์"; break;
+							    case "March": $month = "มีนาคม"; break;
+							    case "April": $month = "เมษายน"; break;
+							    case "May": $month = "พฤษภาคม"; break;
+							    case "June": $month = "มิถุนายน"; break;
+							    case "July": $month = "กรกฎาคม"; break;
+							    case "August": $month = "สิงหาคม"; break;
+							    case "September": $month = "กันยายน"; break;
+							    case "October": $month = "ตุลาคม"; break;
+							    case "November": $month = "พฤศจิกายน"; break;
+							    case "December": $month = "ธันวาคม"; break;
+							}
+
+							$year = $explodeDate[2]+543;
+
+							$date = $explodeDate[0].' '.$month.' '.$year;
+
+			        		echo "
+			        		<tr>
+				                <td>".$data['id_mda']."</td>
+				                <td>".$dataMda['detail']."</td>
+				                <td>".$data['detail']."</td>
+				                <td><center>".$data['year']."</center></td>
+				                <td><center>".$statusMaintenance."</center></td>
+				            </tr>";
+			        	}
+			        	 ?>
+			            
+			        </tbody>
+			    </table>
+			</div>
 
 			
 		</div>
@@ -357,6 +424,16 @@ $picture = $data['picture'];
 		//List Filter Year
 	    var table = $('#example').DataTable();
     } );
+
+    $(document).ready(function() {
+		//Filter Postion
+		$('#example2').DataTable( {
+	        "sDom": '<"top">rt<"bottom"><"clear">'
+	    } );
+
+	    //List Filter Year
+	    var table = $('#example2').DataTable();
+	} );
 
 	document.getElementById("files").onchange = function () {
 	    var reader = new FileReader();
