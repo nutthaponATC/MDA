@@ -44,14 +44,15 @@ if ($_SESSION['type'] != 3) {
 					<a href="search_mda.php">ครุภัณฑ์</a>
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
-					<a href="#">การส่งซ้อม</a>
-				</div>
+					</div>
 			</div>			
-			<a href="add_mda.php">
-				<div id="sMenu" style="width:160px; heigth:100%; float:left;">
-					<div>เพิ่มข้อมูล</div>
+			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
+				<div class="dropbtn">เพิ่มข้อมูล</div>
+				<div class="dropdown-content">
+					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
 				</div>
-			</a>
+			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">รายงาน</div>
 				<div class="dropdown-content">
