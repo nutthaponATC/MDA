@@ -1,5 +1,6 @@
 <?php 
 session_start(); 
+include('popup.php');
 
 if ($_SESSION['type'] != 3) {
 	echo "<script language='javascript'>";
@@ -55,7 +56,7 @@ if ($_SESSION['type'] != 3) {
 	<div style='width:100%; height:15%;'>
 		<div style='width:900px; height:100%; margin:auto;'>
 			<div id='menus'>
-				<a href="">
+				<a href="#popupReport">
 					<div style="width:25%; float:left; padding-top:5%; padding-left:5%;">
 						<img src="image/report.png" width="70">
 					</div>
@@ -65,7 +66,7 @@ if ($_SESSION['type'] != 3) {
 				</a>
 			</div>
 			<div id='menus'>
-				<a href="">
+				<a href="approve_mda.php">
 					<div style="width:23%; float:left; padding-top:4%; padding-left:7%;">
 						<img src="image/book.png" width="40">
 					</div>
@@ -80,7 +81,7 @@ if ($_SESSION['type'] != 3) {
 	<div style='width:100%; height:15%;'>
 		<div style='width:900px; height:100%; margin:auto;'>
 			<div id='menus'>
-				<a href="">
+				<a href="lent_mda.php">
 					<div style="width:25%; float:left; padding-top:4%; padding-left:5%;">
 						<img src="image/rar.png" width="60">
 					</div>

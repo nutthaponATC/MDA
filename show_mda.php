@@ -342,7 +342,7 @@ $picture = $data['picture'];
 				</div>
 			</div>
 		
-			<div style='width:980px; height:300px; padding-top:20px;'>
+			<div style='width:980px; height:300px; padding-top:20px; margin-left:10px;'>
 				<table id="example2" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>

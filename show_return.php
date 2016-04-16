@@ -208,6 +208,48 @@ $(document).ready(function() {
     var table = $('#example').DataTable();
 
 	table.columns().each( function ( colIdx ) {
+	    var select = $('<br><select><option value="">เลือกรายละเอียด</option></select>')
+	        .appendTo(
+	            table.column([1]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([1])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([1])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
+
+	table.columns().each( function ( colIdx ) {
+	    var select = $('<select><option value="">เลือกผู้ยืม</option></select>')
+	        .appendTo(
+	            table.column([2]).header()
+	        )
+	        .on( 'change', function () {
+	            table
+	                .column([2])
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+	    table
+	        .column([2])
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {	       
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+	} );
+
+	table.columns().each( function ( colIdx ) {
 	    var select = $('<br><select><option value="">เลือกเดือน</option><option value="มกราคม">มกราคม</option><option value="กุมภาพันธ์">กุมภาพันธ์</option><option value="มีนาคม">มีนาคม</option><option value="เมษายน">เมษายน</option><option value="พฤษภาคม">พฤษภาคม</option><option value="มิถุนายน">มิถุนายน</option><option value="กรกฎาคม">กรกฎาคม</option><option value="สิงหาคม">สิงหาคม</option><option value="กันยายน">กันยายน</option><option value="ตุลาคม">ตุลาคม</option><option value="พฤศจิกายน">พฤศจิกายน</option><option value="ธันวาคม">ธันวาคม</option></select>')
 	        .appendTo(
 	            table.column([3]).header()
