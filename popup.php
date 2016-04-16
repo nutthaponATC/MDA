@@ -1,6 +1,12 @@
 <?php 
 session_start(); 
 include('config.php');
+
+//approve
+$sqlApprove = "SELECT * FROM lent_return WHERE status = 0";
+$queryApprove = mysql_query($sqlApprove);
+$numberApprove = mysql_num_rows($queryApprove);
+
  ?>
 <html>
 <head>

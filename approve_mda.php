@@ -17,13 +17,13 @@ if ($_SESSION['type'] != 3) {
 
 	<!-- datatable -->
 	<script src="jquery-1.12.0.min.js"></script>      
-	<script type="text/javascript" src="jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="jquery.dataTables.min.js"></script>  
 	<link rel="stylesheet" href="jquery.dataTables.min.css" />  
 
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
-<body id="search">
-<form name="form1">
+<body id="barcode">
+<form name="form1" action="approve_mda_process.php" method="POST">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -102,93 +102,56 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>ประวัติการคืน</h2>
+			<h2>อนุมัติวัสดุครุภัณฑ์</h2>
 		</div>
 	</div>
 
-	<div style='width:100%; height:945px; background:#d8b5fc;'>
-		<div style='width:980px; height:925px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+	<div style='width:100%; height:1000px; background:#d8b5fc;'>
+		<div style='width:980px; height:980px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
 			<table id="example" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
 		                <th>ผู้ยืม</th>
-		                <th align='right'>วันที่ยืม</th>
-		                <th align='left'>ปี</th>
-		                <th>วันที่คืน</th>
+		                <th>วันที่ยืม</th>
+		                <th>เลือก</th>
 		            </tr>
 		        </thead>
 		        <tbody>
 		        	<?php 
-		        	$sql = "SELECT * FROM lent_return WHERE status = 1";
+		        	$user_id = $_SESSION['id'];
+
+		        	$sql = "SELECT * FROM lent_return WHERE user_id = $user_id AND status = 0";
 		        	mysql_query("SET NAMES utf8");
 		        	$query = mysql_query($sql);
 
 		        	while ($data = mysql_fetch_array($query)) {
-
-		        		$dateInput = date('j F Y', strtotime($data['date_lent']));
-						$explodeDate = explode(" ", $dateInput);
-
-						switch($explodeDate[1]) {
-						    case "January": $month = "มกราคม"; break;
-						    case "February": $month = "กุมภาพันธ์"; break;
-						    case "March": $month = "มีนาคม"; break;
-						    case "April": $month = "เมษายน"; break;
-						    case "May": $month = "พฤษภาคม"; break;
-						    case "June": $month = "มิถุนายน"; break;
-						    case "July": $month = "กรกฎาคม"; break;
-						    case "August": $month = "สิงหาคม"; break;
-						    case "September": $month = "กันยายน"; break;
-						    case "October": $month = "ตุลาคม"; break;
-						    case "November": $month = "พฤศจิกายน"; break;
-						    case "December": $month = "ธันวาคม"; break;
-						}
-
-						$date = $explodeDate[0].' '.$month;
-
-						$dateInputReturn = date('j F Y', strtotime($data['date_lent']));
-						$explodeDateReturn = explode(" ", $dateInputReturn);
-
-						switch($explodeDateReturn[1]) {
-						    case "January": $month = "มกราคม"; break;
-						    case "February": $month = "กุมภาพันธ์"; break;
-						    case "March": $month = "มีนาคม"; break;
-						    case "April": $month = "เมษายน"; break;
-						    case "May": $month = "พฤษภาคม"; break;
-						    case "June": $month = "มิถุนายน"; break;
-						    case "July": $month = "กรกฎาคม"; break;
-						    case "August": $month = "สิงหาคม"; break;
-						    case "September": $month = "กันยายน"; break;
-						    case "October": $month = "ตุลาคม"; break;
-						    case "November": $month = "พฤศจิกายน"; break;
-						    case "December": $month = "ธันวาคม"; break;
-						}
-
-						$dateReturn = $explodeDateReturn[0].' '.$month.' '.$explodeDateReturn[2];
-
 		        		echo "
 		        		<tr>
 			                <td>".$data['id_mda']."</td>
 			                <td>".$data['name_mda']."</td>
 			                <td>".$data['name_user']."</td>
-			                <td align='right'>".$date."</td>
-			                <td>".$data['year']."</td>
-			                <td><center>".$dateReturn."</center></td>
+			                <td><center>".$data['date_lent']."</center></td>
+			                <td><center><input type='checkbox' name='check[]' value=".$data['id']."></center></td>
 			            </tr>";
 		        	}
 		        	 ?>
 		            
 		        </tbody>
 		    </table>
-		</div>
 
+			<div style="width:100%; height:50px; margin-right:50px; margin-top:20px; text-align: right;">
+				<input id="bt3" type="submit" name="submit" class="textbox" value="ยืนยันการอนุมัติ">
+			</div>
+
+		</div>
 	</div>
 	</form>
 
-	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
+	<div style="background: #862ae3; margin-top:-5px; width:100%;"></div>
 
-	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px; margin-bottom:0px;">
+	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px;">
 		<font color="#ffffff">&copy Copyright By Attawit School Credit By Nutthapon.B</font>
 	</div>
 </body>
@@ -196,49 +159,11 @@ if ($_SESSION['type'] != 3) {
 
 <script language='javascript'>
 
-
 // datatable
 $(document).ready(function() {
 	//Filter Postion
 	$('#example').DataTable( {
         "sDom": '<"top"f>rt<"bottom"p><"clear">'
     } );
-
-    //List Filter Year
-    var table = $('#example').DataTable();
-
-	table.columns().each( function ( colIdx ) {
-	    var select = $('<br><select><option value="">เลือกเดือน</option><option value="มกราคม">มกราคม</option><option value="กุมภาพันธ์">กุมภาพันธ์</option><option value="มีนาคม">มีนาคม</option><option value="เมษายน">เมษายน</option><option value="พฤษภาคม">พฤษภาคม</option><option value="มิถุนายน">มิถุนายน</option><option value="กรกฎาคม">กรกฎาคม</option><option value="สิงหาคม">สิงหาคม</option><option value="กันยายน">กันยายน</option><option value="ตุลาคม">ตุลาคม</option><option value="พฤศจิกายน">พฤศจิกายน</option><option value="ธันวาคม">ธันวาคม</option></select>')
-	        .appendTo(
-	            table.column([3]).header()
-	        )
-	        .on( 'change', function () {
-	            table
-	                .column([3])
-	                .search( $(this).val() )
-	                .draw();
-	        } );
-	} );
-	table.columns().each( function ( colIdx ) {
-	    var select = $('<select><option value="">เลือกปี</option></select>')
-	        .appendTo(
-	            table.column([4]).header()
-	        )
-	        .on( 'change', function () {
-	            table
-	                .column([4])
-	                .search( $(this).val() )
-	                .draw();
-	        } );
-	    table
-	        .column([4])
-	        .cache( 'search' )
-	        .sort()
-	        .unique()
-	        .each( function ( d ) {	       
-	            select.append( $('<option value="'+d+'">'+d+'</option>') );
-	        } );
-	} );
-
 } );
 </script>

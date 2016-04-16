@@ -104,9 +104,16 @@ $picture = $data['picture'];
 					<a href="return_mda.php">คืนครุภัณฑ์</a>
 				</div>
 			</div>
-			<a href="">
-				<div id="sMenu" style="width:140px; heigth:100%; float:left;">
-					<div>การอนุมัติ</div>
+			<a href="approve_mda.php">
+				<div id="sMenu" style="width:160px; heigth:100%; float:left;">
+					<div style="width:100px; float:left;">การอนุมัติ</div>
+					<?php 
+					if ($numberApprove == 0) {
+						echo "<div style='width:30px; height:35px; float:left;'></div>";	
+					} else {
+						echo "<div style='width:30px; height:35px; float:left; border-color: #ff0000; border-style: solid; border-radius: 5px; text-align:center; margin-top:-3px; color: #ff0000;'>".$numberApprove."</div>";	
+					}
+					 ?>
 				</div>
 			</a>
 			<a href="">
