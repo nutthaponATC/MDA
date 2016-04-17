@@ -93,7 +93,7 @@ $picture = $data['picture'];
 					<a href="barcode.php">barcode</a>
 					<a href="#popupReportLent">รายงานการยืม</a>
 					<a href="#popupReportReturn">รายงานการคืน</a>
-					<a href="#">รายงานค่าเสื่อมราคา</a>
+					<!-- <a href="#">รายงานค่าเสื่อมราคา</a> -->
 
 				</div>
 			</div>
@@ -116,11 +116,13 @@ $picture = $data['picture'];
 					 ?>
 				</div>
 			</a>
-			<a href="">
-				<div id="sMenu" style="width:50px; heigth:105%; float:left;">
-					<div><img src="image/pass.png" width="36"></div>
+			<div class="dropdown" style="width:50px; heigth:105%; float:left;">
+				<div class="dropbtn"><img src="image/pass.png" width="36"></div>
+				<div class="dropdown-content">
+					<a href="setting_finance.php">การตั้งค่า</a>
+					<a href="#popupLogout">Logout</a>
 				</div>
-			</a>
+			</div>
 		</div>
 	</div>
 

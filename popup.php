@@ -239,5 +239,19 @@ $numberApprove = mysql_num_rows($queryApprove);
 		</form>
 	</div>
 
+	<div id="popupLogout" class="overlay">
+		<form action="logout.php" method="POST" name="formLogout">
+			<div class="popup">
+				<div style="font-size:30px;">ยืนยันการ Logout</div>
+				<a class="close" href="#">&times;</a>
+				<div class="content">
+					<div style="float:left; margin:auto; margin-top:30px;">
+						<input id="bt3" type="submit" name="submit" class="textbox" value="Logout">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
 </body>
 </html>

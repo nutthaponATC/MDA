@@ -14,16 +14,9 @@ if ($_SESSION['type'] != 3) {
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="image/icon.ico">
 	<link rel="stylesheet" href="style.css">
-
-	<!-- datatable -->
-	<script src="jquery-1.12.0.min.js"></script>      
-	<script type="text/javascript" src="jquery.dataTables.min.js"></script>  
-	<link rel="stylesheet" href="jquery.dataTables.min.css" />  
-
 	<title>เว็บไซต์ระบบฐานข้อมูลวัสดุครุภัณฑ์โรงเรียนอรรถวิทย์</title>
 </head>
-<body id="barcode">
-<form name="form1" action="#popupReturn" method="POST">
+<body id="add">
 	<div style='width:100%; height:180px;'>
 		<div style='width:1000px; heigth:100%; margin:auto; padding-top:1%;'>
 			<div style='width:15%; heigth:100%; float:left;'>
@@ -104,75 +97,49 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>เลือกรายการที่ต้องการคืน ของคุณ<?php echo $_SESSION['name_user']; ?></h2>
+			<h2>การตั้งค่า</h2>
 		</div>
 	</div>
 
-	<div style='width:100%; height:1000px; background:#d8b5fc;'>
-		<div style='width:980px; height:980px; padding-top:20px; padding-left:10px; padding-right:10px; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
-			<table id="example" class="display" style="font-size: 20px;" cellspacing="0" width="100%">
-		        <thead>
-		            <tr>
-		                <th>เลขทะเบียน</th>
-		                <th>รายละเอียด</th>
-		                <th>วันที่ยืม</th>
-		                <th>เลือก</th>
-		            </tr>
-		        </thead>
-		        <tfoot>
-		            <tr>
-		                <th></th>
-		                <th></th>
-		                <th></th>
-		                <th></th>
-		            </tr>
-		        </tfoot>
-		        <tbody>
-		        	<?php 
-		        	$user_id = $_SESSION['id'];
+	<form name="form1" action="setting_finance_process.php" method="POST" enctype="multipart/form-data">
+		<div style='width:100%; height:750px; background:#d8b5fc;'> 
+			<div style="width:1000px; height:100%; background:#e1c4ff; margin:auto; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);">
+				<div style='width:1000px; height:50px; margin:auto; background: #862ae3; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
+					<div style="width:60%; height:100%; float:left;">
+						<h2 style="margin-top:-15px; padding-left:10px; color:#ffffff;">ตั้งค่าหมวด</h2>
+					</div>
+					<div style="width:30%; height:100%; margin-left:50px; float:left;">
+					</div>
+				</div>
 
-		        	$sql = "SELECT * FROM lent_return WHERE user_id = $user_id AND status != 1";
-		        	mysql_query("SET NAMES utf8");
-		        	$query = mysql_query($sql);
+				<?php 
+				$sqlType = "SELECT * FROM type";
+				$queryType = mysql_query($sqlType);
 
-		        	while ($data = mysql_fetch_array($query)) {
-		        		echo "
-		        		<tr>
-			                <td>".$data['id_mda']."</td>
-			                <td>".$data['name_mda']."</td>
-			                <td><center>".$data['date_lent']."</center></td>
-			                <td><center><input type='checkbox' name='check[]' value=".$data['id']."></center></td>
-			            </tr>";
-		        	}
-		        	 ?>
-		            
-		        </tbody>
-		    </table>
-
-			<div style="width:100%; height:50px; margin-right:50px; margin-top:20px; text-align: right;">
-				<input id="bt3" type="submit" name="submit" class="textbox" value="คืนครุภัณฑ์">
-				<input id="bt3" type="reset" name="reset" class="textbox" value="ล้างข้อมูล">
+				while ($dataType = mysql_fetch_array($queryType)) {
+					echo "
+					<div style='width:350px; height:35px; margin:auto;'>
+						<div style='width:50px; height:30px; float:left;'>
+							<input id='textbox' style='height:30px; width:50px;' type='text' name='idType[]' value=".$dataType['id_type']." readonly>
+						</div>
+						<div style='width:300px; height:30px; float:left;'>
+							<input id='textbox' style='height:30px; width:300px;' type='text' name='detail[]' value=".$dataType['detail'].">
+						</div>
+					</div>";
+				}
+				?>
+				
+				<div style='width:350px; height:35px; margin:auto;'>
+					<input id="bt3" type="submit" name="submit" value="ยืนยัน">
+				</div>
 			</div>
-
 		</div>
-	</div>
 	</form>
+	
+	<div style="background: #862ae3; margin-top:10px; width:100%;"></div>
 
-	<div style="background: #862ae3; margin-top:-5px; width:100%;"></div>
-
-	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px;">
+	<div style="background:#323232; width:100%; height:30px; text-align: center; padding-top: 13px; margin-bottom:0px;">
 		<font color="#ffffff">&copy Copyright By Attawit School Credit By Nutthapon.B</font>
 	</div>
 </body>
 </html>
-
-<script language='javascript'>
-
-// datatable
-$(document).ready(function() {
-	//Filter Postion
-	$('#example').DataTable( {
-        "sDom": '<"top"f>rt<"bottom"p><"clear">'
-    } );
-} );
-</script>
