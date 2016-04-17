@@ -63,7 +63,7 @@ if ($_SESSION['type'] != 4) {
 	<div style='width:100%; height:15%;'>
 		<div style='width:900px; height:100%; margin:auto;'>
 			<div id='menus' style='margin-left:30%;'>
-				<a href="lent_mda_teacher.php">
+				<a href="lent_mda_manager.php">
 					<div style="width:25%; float:left; padding-top:4%; padding-left:5%;">
 						<img src="image/rar.png" width="60">
 					</div>
