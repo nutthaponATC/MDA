@@ -253,5 +253,70 @@ $numberApprove = mysql_num_rows($queryApprove);
 		</form>
 	</div>
 
+	<div id="popupTeacherLent" class="overlay">
+		<form name="formLent" action="lent_mda_teacher_process.php" method="POST">
+			<div class="popup">
+				<div style="font-size:30px;">รายการที่ต้องการยืม</div>
+				<a class="close" href="#">&times;</a>
+				<div class="content">
+					<?php 
+					$arrayId = $_POST['check'];
+					$count = count($arrayId);
+					$i = 0;
+
+					while ($i < $count) {
+						$id_data_mda = $arrayId[$i];
+						$sql = "SELECT `id_mda`,`detail` FROM data_mda WHERE id = $id_data_mda";
+						$query = mysql_query($sql);
+						$data = mysql_fetch_array($query);
+						$id_mda = $data['id_mda'];
+						$detail = $data['detail'];
+
+					echo '<input type="text" style="width:50px;" name="id_data_mda[]" value='.$id_data_mda.' readonly><input type="text" style="width:150px;" name="id_mda[]" value='.$id_mda.' readonly><input type="text" style="width:200px;" name="detail[]" value='.$detail.' readonly>';
+						$i++;
+					}
+
+					 ?>
+					<div style="float:left; margin:auto; margin-top:30px;">
+						<input id="bt3" type="submit" name="submit" class="textbox" value="ยืนยัน การยืม">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id="popupTeacherReturn" class="overlay">
+		<form name="form3" action="return_mda_teacher_process.php" method="POST">
+			<div class="popup">
+				<div style="font-size:30px;">รายการที่ต้องการคืน</div>
+				<a class="close" href="#">&times;</a>
+				<div class="content">
+					<?php 
+					$arrayId = $_POST['check'];
+					$count = count($arrayId);
+					$i = 0;
+
+					while ($i < $count) {
+						$id_data_lent = $arrayId[$i];
+						$sql = "SELECT `id_mda`,`name_mda`,`id_data_mda` FROM lent_return WHERE id = $id_data_lent";
+						$query = mysql_query($sql);
+						$data = mysql_fetch_array($query);
+						$id_data_mda = $data['id_data_mda'];
+						$id_mda = $data['id_mda'];
+						$detail = $data['name_mda'];
+
+					echo '<input type="text" style="width:50px;" name="id_data_lent[]" value='.$id_data_lent.' readonly><input type="text" style="width:150px;" name="id_mda[]" value='.$id_mda.' readonly><input type="text" style="width:200px;" name="detail[]" value='.$detail.' readonly><input type="hidden" name="id_data_mda[]" value='.$id_data_mda.'>';
+						$i++;
+					}
+
+					 ?>
+					<div style="float:left; margin:auto; margin-top:30px;">
+						<input id="bt3" type="submit" name="submit" class="textbox" value="ยืนยัน การคืน">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
 </body>
 </html>
