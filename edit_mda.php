@@ -73,14 +73,14 @@ $picture = $data['picture'];
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">เพิ่มข้อมูล</div>
 				<div class="dropdown-content">
 					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
-					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ่อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">

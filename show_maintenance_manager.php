@@ -52,7 +52,7 @@ if ($_SESSION['type'] != 4) {
 					<a href="show_lent_manager.php">ประวัติการยืม</a>
 					<a href="show_return_manager.php">ประวัติการคืน</a>
 					<a href="history_mda_manager.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance_manager.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance_manager.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:280px; heigth:100%; float:left;">
@@ -82,7 +82,7 @@ if ($_SESSION['type'] != 4) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>ประวัติการส่งซ้อม</h2>
+			<h2>ประวัติการส่งซ่อม</h2>
 		</div>
 	</div>
 
@@ -93,7 +93,7 @@ if ($_SESSION['type'] != 4) {
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
-		                <th>รายละเอียดการซ้อม</th>
+		                <th>รายละเอียดการซ่อม</th>
 		                <th>ปีการศึกษา</th>
 		                <th>สถานะ</th>
 		            </tr>
@@ -111,9 +111,9 @@ if ($_SESSION['type'] != 4) {
 		        		$dataMda = mysql_fetch_array($queryDataMda);
 
 		        		if ($data['status'] == 0) {
-		        			$statusMaintenance = 'ส่งซ้อม';
+		        			$statusMaintenance = 'ส่งซ่อม';
 		        		} else {
-		        			$statusMaintenance = 'ซ้อมเรียบร้อย';
+		        			$statusMaintenance = 'ซ่อมเรียบร้อย';
 		        		}
 
 		        		$dateInput = date('j F Y', strtotime($data['date_send']));

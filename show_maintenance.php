@@ -52,14 +52,14 @@ if ($_SESSION['type'] != 3) {
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">เพิ่มข้อมูล</div>
 				<div class="dropdown-content">
 					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
-					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ่อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -104,7 +104,7 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>ประวัติการส่งซ้อม</h2>
+			<h2>ประวัติการส่งซ่อม</h2>
 		</div>
 	</div>
 
@@ -115,7 +115,7 @@ if ($_SESSION['type'] != 3) {
 		            <tr>
 		                <th>เลขทะเบียน</th>
 		                <th>รายละเอียด</th>
-		                <th>รายละเอียดการซ้อม</th>
+		                <th>รายละเอียดการซ่อม</th>
 		                <th>ปีการศึกษา</th>
 		                <th>สถานะ</th>
 		            </tr>
@@ -133,9 +133,9 @@ if ($_SESSION['type'] != 3) {
 		        		$dataMda = mysql_fetch_array($queryDataMda);
 
 		        		if ($data['status'] == 0) {
-		        			$statusMaintenance = 'ส่งซ้อม';
+		        			$statusMaintenance = 'ส่งซ่อม';
 		        		} else {
-		        			$statusMaintenance = 'ซ้อมเรียบร้อย';
+		        			$statusMaintenance = 'ซ่อมเรียบร้อย';
 		        		}
 
 		        		$dateInput = date('j F Y', strtotime($data['date_send']));

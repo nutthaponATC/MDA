@@ -51,14 +51,14 @@ if ($_SESSION['type'] != 3) {
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">เพิ่มข้อมูล</div>
 				<div class="dropdown-content">
 					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
-					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ่อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -103,7 +103,7 @@ if ($_SESSION['type'] != 3) {
 
 	<div style='width:100%; height:80px; margin-top:-29px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
-			<h2>เลือกวัสดุครุภัณฑ์ที่ต้องการส่งซ้อม</h2>
+			<h2>เลือกวัสดุครุภัณฑ์ที่ต้องการส่งซ่อม</h2>
 		</div>
 	</div>
 
@@ -131,7 +131,7 @@ if ($_SESSION['type'] != 3) {
 		        		} elseif ($data['status'] == 1) {
 		        			$statusLent = 'ปกติ';
 		        		} else {
-		        			$statusLent = 'ส่งซ้อม';
+		        			$statusLent = 'ส่งซ่อม';
 		        		}
 
 		        		echo "

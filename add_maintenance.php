@@ -67,14 +67,14 @@ $status = $data['status'];
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">เพิ่มข้อมูล</div>
 				<div class="dropdown-content">
 					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
-					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ่อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -122,11 +122,11 @@ $status = $data['status'];
 	<div style='width:100%; height:80px; background:#ffffff;'>
 		<div style='width:1000px; height:100%; margin:auto; background:#ffffff;'>
 			<div style="width:60%; height:100%; float:left;">
-				<h2 style="margin-top:-5px;">ข้อมูลการส่งซ้อม</h2>
+				<h2 style="margin-top:-5px;">ข้อมูลการส่งซ่อม</h2>
 			</div>
 			<div style="width:30%; height:100%; margin-left:50px; float:left;">
 				<div style="width:150px; float:left; margin-top:20px;">
-					<input id="bt3" type="submit" name="submit" class="textbox" value="บันทึกการส่งซ้อม">
+					<input id="bt3" type="submit" name="submit" class="textbox" value="บันทึกการส่งซ่อม">
 				</div>
 				<div style="width:10%; float:left; margin-top:20px;">
 					<a href="select_maintenance.php"><input id="bt3" type="button" name="back" class="textbox" value="ย้อนกลับ"></a>
@@ -166,9 +166,9 @@ $status = $data['status'];
 					echo "<div id='inAdd'>
 						ผู้ดูแล
 						<input id='textbox' style='height:30px; width:300px; margin-right:20px;' type='text' name='supervisor' value=".$dataMaintenance['supervisor'].">
-						วันที่ส่งซ้อม
+						วันที่ส่งซ่อม
 						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_send'  value=".$dataMaintenance['date_send'].">
-						วันที่ซ้อมเสร็จ
+						วันที่ซ่อมเสร็จ
 						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_return'>
 					</div>
 
@@ -176,7 +176,7 @@ $status = $data['status'];
 						<div style='width:45%; height:100%; float:left;'>
 							<div style='width:150px; height:100%; float:left;'>
 								<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-									รายละเอียดการซ้อม
+									รายละเอียดการซ่อม
 								</font>
 							</div>
 							<div style='width:270px; height:100%; float:left;'>
@@ -214,9 +214,9 @@ $status = $data['status'];
 					echo "<div id='inAdd'>
 						ผู้ดูแล
 						<input id='textbox' style='height:30px; width:300px; margin-right:20px;' type='text' name='supervisor'>
-						วันที่ส่งซ้อม
+						วันที่ส่งซ่อม
 						<input id='textbox' style='height:30px; width:200px;' type='date' name='date_send'>
-						วันที่ซ้อมเสร็จ
+						วันที่ซ่อมเสร็จ
 						<input id='textbox' style='height:30px; width:200px;' type='text' name='date_return' value='-' readonly>
 					</div>
 
@@ -224,7 +224,7 @@ $status = $data['status'];
 						<div style='width:45%; height:100%; float:left;'>
 							<div style='width:150px; height:100%; float:left;'>
 								<font style='font-family:TH Sarabun New; font-size: 25px; color:#565656; padding-left:10px;'>
-									รายละเอียดการซ้อม
+									รายละเอียดการซ่อม
 								</font>
 							</div>
 							<div style='width:270px; height:100%; float:left;'>

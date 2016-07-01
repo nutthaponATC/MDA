@@ -17,7 +17,7 @@ $status = $_POST['status'];
 
 if ($status == 2 && $date_return == '') {
 	echo "<script language='javascript'>";
-	echo "alert('กรุณาป้อนวันที่ซ้อมเสร็จ');";
+	echo "alert('กรุณาป้อนวันที่ซ่อมเสร็จ');";
 	echo "location='select_maintenance.php';";
 	echo "</script>";
 }
@@ -40,12 +40,12 @@ if ($status == 2) {
 
 if ($query) {
 	echo "<script language='javascript'>";
-	echo "alert('บันทึกข้อมูลการซ้อมเรียบร้อย');";
+	echo "alert('บันทึกข้อมูลการซ่อมเรียบร้อย');";
 	echo "location='select_maintenance.php';";
 	echo "</script>";
 } else {
 	echo "<script language='javascript'>";
-	echo "alert('ไม่สามารถบันทึกข้อมูลการซ้อมได้ กรุณาป้อนข้อมูลใหม่');";
+	echo "alert('ไม่สามารถบันทึกข้อมูลการซ่อมได้ กรุณาป้อนข้อมูลใหม่');";
 	echo "location='select_maintenance.php';";
 	echo "</script>";
 }

@@ -52,7 +52,7 @@ if ($_SESSION['type'] != 4) {
 					<a href="show_lent_manager.php">ประวัติการยืม</a>
 					<a href="show_return_manager.php">ประวัติการคืน</a>
 					<a href="history_mda_manager.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance_manager.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance_manager.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:280px; heigth:100%; float:left;">

@@ -16,7 +16,8 @@ if (isset($user) && $user != "" && isset($pass) && $pass != "") {
 	$user_id = $fetchData['user_id'];
 	$name = $fetchData['name'];
 
-	if ($countCheck == 1) {
+	if ($query) {
+	// if ($countCheck == 1) {
 		$_SESSION['type'] = $type;
 		$_SESSION['id'] = $user_id;
 		$_SESSION['name_user'] = $name;

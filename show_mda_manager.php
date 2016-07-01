@@ -76,14 +76,14 @@ $picture = $data['picture'];
 					<a href="show_lent.php">ประวัติการยืม</a>
 					<a href="show_return.php">ประวัติการคืน</a>
 					<a href="history_mda.php">ประวัติทรัพย์สิน</a>
-					<a href="show_maintenance.php">ประวัติการส่งซ้อม</a>
+					<a href="show_maintenance.php">ประวัติการส่งซ่อม</a>
 					</div>
 			</div>			
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
 				<div class="dropbtn">เพิ่มข้อมูล</div>
 				<div class="dropdown-content">
 					<a href="add_mda.php">เพิ่มข้อมูลครุภัณฑ์</a>
-					<a href="select_maintenance.php">เพิ่มข้อมูลการซ้อม</a>
+					<a href="select_maintenance.php">เพิ่มข้อมูลการซ่อม</a>
 				</div>
 			</div>
 			<div class="dropdown" style="width:160px; heigth:100%; float:left;">
@@ -335,7 +335,7 @@ $picture = $data['picture'];
 
 			    <div style='width:1000px; height:50px; margin-right:0px; margin:auto; background: #862ae3; box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.14);'>
 					<div style="width:60%; height:100%; float:left;">
-						<h2 style="margin-top:-15px; padding-left:10px; color:#ffffff;">ประวัติการซ้อม</h2>
+						<h2 style="margin-top:-15px; padding-left:10px; color:#ffffff;">ประวัติการซ่อม</h2>
 					</div>
 					<div style="width:30%; height:100%; margin-left:50px; float:left;">
 					</div>
@@ -348,7 +348,7 @@ $picture = $data['picture'];
 			            <tr>
 			                <th>เลขทะเบียน</th>
 			                <th>รายละเอียด</th>
-			                <th>รายละเอียดการซ้อม</th>
+			                <th>รายละเอียดการซ่อม</th>
 			                <th>ปีการศึกษา</th>
 			                <th>สถานะ</th>
 			            </tr>
@@ -366,9 +366,9 @@ $picture = $data['picture'];
 			        		$dataMda = mysql_fetch_array($queryDataMda);
 
 			        		if ($data['status'] == 0) {
-			        			$statusMaintenance = 'ส่งซ้อม';
+			        			$statusMaintenance = 'ส่งซ่อม';
 			        		} else {
-			        			$statusMaintenance = 'ซ้อมเรียบร้อย';
+			        			$statusMaintenance = 'ซ่อมเรียบร้อย';
 			        		}
 
 			        		$dateInput = date('j F Y', strtotime($data['date_send']));
